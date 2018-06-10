@@ -1,7 +1,6 @@
-# Instalacion_Informix
-Cosas para instalar informix
+### Instalar Informix 12.50 en Centos7
 
-Instalar Informix 12.50 en Centos7 : 
+Creamos el usuario informix, el grupo informix y un archivo de perfil compartido
 
 ```
 sudo groupadd informix                                    # Crear grupo informix
@@ -21,7 +20,8 @@ ONCONFIG=onconfig.std
 PATH=$INFORMIX/bin:$PATH:/opt/informix/bin
 export INFORMIXDIR PATH INFORMIXSERVER ONCONFIG SQLHOSTS
 ```
-Seguir con los pasos siguientes :
+
+Instalamos el DBMS y lo configuramos
 
 ```
 sudo mv $HOME/iif*.tar /opt/informix						# Mover el tar que bajhan de IBM a la carpeta /opt/informix
@@ -39,16 +39,22 @@ Copiar esto a /opt/informix/etc/sqlhosts
 	#dbservername    nettype       hostname      servicename      options
 	miServidor       onsoctcp      localhost     informix 
 ```
+En este archivo hay que EDITARLO, no sobreescribirlo del todo...
 
 ```
 sudo vi /opt/informix/etc/onconfig.std						# Editar el archivo onconfig con estos valores ( en vi se puede buscar con el ? )
 ```
+
+Buscamos donde estan esas lineas y las editamos
+
 ```
 	ROOTPATH /opt/informix/logdir/rootdbs
 	LTAPEDEV  /matiasInformixDBSpaces
 	DBSERVERNAME miServidor
 	ROOTSIZE 1000000
 ```
+
+Creamos el root dbspace
 
 ```
 su informix -c "mkdir /opt/informix/logdir"				# Creamos el directorio /opt/informix/logdir	
@@ -58,6 +64,8 @@ su informix -c "touch rootdbs"							# Creamos el root dbs
 su informix -c "chmod 660 rootdbs"						# Le cambiamos los permisos al dbspace root
 sudo chown informix.informix rootdbs					# Le cambiamos los owners al dbspace root
 ```
+Editamos el archivo de servicios y añadimos el nuestro, que lo vamos a llamar... informix... :P
+
 ```
 sudo vi /etc/services									# Añadimos esta linea al final del archivo /etc/informix ( Si ya tienen algun servicio en el puerto 50000 cambiar por otro numero mayor a 50000, por ej 53400)
 ```
@@ -68,39 +76,59 @@ Y pegar este contenido :
 informix        50000/tcp		# Informix server
 ```
 
+Creamos unos dbspace para trabajar nosotros, no creamos bases de datos en el dbspace del root porque es una chanchada
+
 ```
-sudo mkdir /mis_dbspaces									# Creamos una carpeta para los dbspaces
-sudo chown informix.informix /mis_dbspaces				# le damos ownership de esa carpeta a el usuario informix
-sudo su -											# nos convertimos en root
-27) cd /opt/informix/ 								# Nos vamos a la carpeta de informix ( por las dudas)
-source /etc/profile.d/informix.sh  					# Por si las moscas, ahcemos source al perfil
-oninit -ivy											# ACA EL SERVER DEBERIA LEVANTAR
+sudo mkdir /mis_dbspaces                     # Creamos una carpeta para los dbspaces
+sudo chown informix.informix /mis_dbspaces   # le damos ownership de esa carpeta a el usuario informix
+sudo su -                                    # nos convertimos en root
+cd /opt/informix/                            # Nos vamos a la carpeta de informix ( por las dudas)
+source /etc/profile.d/informix.sh            # Por si las moscas, ahcemos source al perfil
+oninit -ivy                                  # ACA EL SERVER DEBERIA LEVANTAR
 ```
+
 En este paso, si todo quedo ok, el server deberia levantar.
 Despues de eso deberiamos chequear si esta online con este comando :
-    onstat -
+
+```
+onstat -
+```
+
 Si todo quedo bien deberiamos ver un mensaje como este :
-		
-			"IBM Informix Dynamic Server Version 10.00.UC4 -- On-Line -- Up 00:00:07 -- 19508 Kbytes"
-			.....
+
+```
+"IBM Informix Dynamic Server Version 10.00.UC4 -- On-Line -- Up 00:00:07 -- 19508 Kbytes"
+.....
+```
 
 De ahora en mas creamos un dbspace propio, porque crear una base de datos 
 en el espacio del root es una chanchada
 	
 ```
-cd /mis_dbspaces																			# Vamos a la carpeta que creamos para los dbspaces
-touch mi_primer_dbspace.dbspace																# Creamos un archivo vacio que sera nuestro primer dbspace
-chown informix.informix mi_primer_dbspace.dbspace 											# le damos el ownership a informix
-chmod 660 mi_primer_dbspace.dbspace 										        		# Cambiamos los permissos a 660
+cd /mis_dbspaces                                  # Creamos una base de datos llamada 'mapas'
+touch mi_primer_dbspace.dbspace                   # Creamos un archivo vacio que sera nuestro primer dbspace
+chown informix.informix mi_primer_dbspace.dbspace # le damos el ownership a informix
+chmod 660 mi_primer_dbspace.dbspace               # Cambiamos los permissos a 660
+
+```
+
+Y finalmente añadimos el dbspace
+
+```
 onspaces -c -d mi_primer_dbspace -p /mis_dbspaces/mi_primer_dbspace.dbspace -o 0 -s 100000  # Crear el dbspace
-exit 																						# dejamos de ser root 
-cd 																							# vamos a nuestro home
+```
+
+Dejamos de ser root y pasamos a crear una base de datos de prueba
+
+```
+exit # dejamos de ser root 
+cd   # vamos a nuestro home
 ```
 
 Creamos una base de datos llamada 'mapas'				
 
 ```
-touch crear_db.sql && vi crear_db.sql																		# Creamos un archivo sql con estas lineas 
+touch crear_db.sql && vi crear_db.sql # Creamos un archivo sql con estas lineas 
 ```
 
 Y pegamos este contenido en el archivo : 
