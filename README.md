@@ -58,12 +58,12 @@ ROOTSIZE 1000000
 Creamos el root dbspace
 
 ```
-su informix -c "mkdir /opt/informix/logdir"				# Creamos el directorio /opt/informix/logdir	
-su informix -c "chmod 777 /opt/informix/logdir"			# Le cambiamos los permisos
-cd /opt/informix/logdir 								# Nos movemos a /opt/informix/logdir	
-su informix -c "touch rootdbs"							# Creamos el root dbs 
-su informix -c "chmod 660 rootdbs"						# Le cambiamos los permisos al dbspace root
-sudo chown informix.informix rootdbs					# Le cambiamos los owners al dbspace root
+su informix -c "mkdir /opt/informix/logdir"       # Creamos el directorio /opt/informix/logdir	
+su informix -c "chmod 777 /opt/informix/logdir"   # Le cambiamos los permisos
+cd /opt/informix/logdir                           # Nos movemos a /opt/informix/logdir	
+su informix -c "touch rootdbs"                    # Creamos el root dbs 
+su informix -c "chmod 660 rootdbs"                # Le cambiamos los permisos al dbspace root
+sudo chown informix.informix rootdbs              # Le cambiamos los owners al dbspace root
 ```
 Editamos el archivo de servicios y añadimos el nuestro, que lo vamos a llamar... informix... :P
 
@@ -116,7 +116,7 @@ chmod 660 mi_primer_dbspace.dbspace               # Cambiamos los permissos a 66
 Y finalmente añadimos el dbspace
 
 ```
-onspaces -c -d mi_primer_dbspace -p /mis_dbspaces/mi_primer_dbspace.dbspace -o 0 -s 100000  # Crear el dbspace
+onspaces -c -d mi_primer_dbspace -p /mis_dbspaces/mi_primer_dbspace.dbspace -o 0 -s 1000000  # Crear el dbspace
 ```
 
 Dejamos de ser root y pasamos a crear una base de datos de prueba
