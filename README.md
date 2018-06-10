@@ -14,12 +14,12 @@ sudo vi /etc/profile.d/informix.sh                        # Generar un archivo d
 Copiar este contenido a /etc/profile.d/informix.sh
 
 ```
-      SQLHOSTS=/opt/informix/etc/sqlhosts
-      INFORMIXDIR=/opt/informix
-      INFORMIXSERVER=miServidor
-      ONCONFIG=onconfig.std
-      PATH=$INFORMIX/bin:$PATH:/opt/informix/bin
-      export INFORMIXDIR PATH INFORMIXSERVER ONCONFIG SQLHOSTS
+SQLHOSTS=/opt/informix/etc/sqlhosts
+INFORMIXDIR=/opt/informix
+INFORMIXSERVER=miServidor
+ONCONFIG=onconfig.std
+PATH=$INFORMIX/bin:$PATH:/opt/informix/bin
+export INFORMIXDIR PATH INFORMIXSERVER ONCONFIG SQLHOSTS
 ```
 Seguir con los pasos siguientes :
 
