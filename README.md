@@ -22,22 +22,23 @@ export INFORMIXDIR PATH INFORMIXSERVER ONCONFIG SQLHOSTS
 ```
 
 Instalamos el DBMS y lo configuramos
+Cuando poregunte si queres crear una instancia decimos que NO!! 
 
 ```
-sudo mv $HOME/iif*.tar /opt/informix						# Mover el tar que bajhan de IBM a la carpeta /opt/informix
-cd /opt/informix									# Ir a /opt/informix
-su informix -c "tar -xvf iif*.tar"						# Descomprimirlo como el usuario informix
-sudo ./ids_install											# Instalamos el informix ejecutando el instalador. Cuando poregunte si queres crear una instancia decimos que NO!! 
-sudo touch /opt/informix/etc/sqlhosts				# Crear el archivo sqlhosts
-sudo chown informix.informix /opt/informix/etc/sqlhosts
-sudo vi 	/opt/informix/etc/sqlhosts		# Si quieren otro nombre de server deben cambiar tambien todas las referencias anterirores a miServidor (Paso 5) )
+sudo mv $HOME/iif*.tar /opt/informix                           # Mover el tar que bajhan de IBM a la carpeta /opt/informix
+cd /opt/informix                                               # Ir a /opt/informix
+su informix -c "tar -xvf iif*.tar"                             # Descomprimirlo como el usuario informix
+sudo ./ids_install                                             # Instalamos el informix ejecutando el instalador.
+sudo touch /opt/informix/etc/sqlhosts                          # Crear el archivo sqlhosts
+sudo chown informix.informix /opt/informix/etc/sqlhosts        # Le damos ownership al grupo y usuario informix
+sudo vi /opt/informix/etc/sqlhosts                             # Si quieren otro nombre de server deben cambiar tambien todas las referencias anterirores a miServidor (Paso 5) )
 ``` 
 
 Copiar esto a /opt/informix/etc/sqlhosts
 
 ```
-	#dbservername    nettype       hostname      servicename      options
-	miServidor       onsoctcp      localhost     informix 
+#dbservername    nettype       hostname      servicename      options
+miServidor       onsoctcp      localhost     informix 
 ```
 En este archivo hay que EDITARLO, no sobreescribirlo del todo...
 
@@ -48,10 +49,10 @@ sudo vi /opt/informix/etc/onconfig.std						# Editar el archivo onconfig con est
 Buscamos donde estan esas lineas y las editamos
 
 ```
-	ROOTPATH /opt/informix/logdir/rootdbs
-	LTAPEDEV  /matiasInformixDBSpaces
-	DBSERVERNAME miServidor
-	ROOTSIZE 1000000
+ROOTPATH /opt/informix/logdir/rootdbs
+LTAPEDEV  /matiasInformixDBSpaces
+DBSERVERNAME miServidor
+ROOTSIZE 1000000
 ```
 
 Creamos el root dbspace
