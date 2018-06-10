@@ -34,11 +34,13 @@ sudo chown informix.informix /opt/informix/etc/sqlhosts        # Le damos owners
 sudo vi /opt/informix/etc/sqlhosts                             # Si quieren otro nombre de server deben cambiar tambien todas las referencias anterirores a miServidor (Paso 5) )
 ``` 
 
-Copiar esto a /opt/informix/etc/sqlhosts
+Copiar esto a /opt/informix/etc/sqlhosts.
+Si dejamos localhost no podemos conectarnos remotamente.
+Solo cuando ponemos una IP nos lo va a permitir.
 
 ```
 #dbservername    nettype       hostname      servicename      options
-miServidor       onsoctcp      localhost     informix 
+miServidor       onsoctcp      (localhost  or ip)    informix 
 ```
 En este archivo hay que EDITARLO, no sobreescribirlo del todo...
 
