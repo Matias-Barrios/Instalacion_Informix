@@ -59,7 +59,7 @@ Creamos el root dbspace
 
 ```
 su informix -c "mkdir /opt/informix/logdir"       # Creamos el directorio /opt/informix/logdir	
-su informix -c "chmod 777 /opt/informix/logdir"   # Le cambiamos los permisos
+su informix -c "chmod 770 /opt/informix/logdir"   # Le cambiamos los permisos
 cd /opt/informix/logdir                           # Nos movemos a /opt/informix/logdir	
 su informix -c "touch rootdbs"                    # Creamos el root dbs 
 su informix -c "chmod 660 rootdbs"                # Le cambiamos los permisos al dbspace root
@@ -168,7 +168,13 @@ INSERT INTO Institutos (nombre, calle, numero, telefonos, email, baja)
 VALUES ('Escuela Técnica Artigas', "Bernabé Rivera Esq. Gral Rivera", 626 , "47723687|47725988", "etautu626@adinet.com.uy", "f");
 
 ```
- 
+
+Habilitamos el puerto 50000 en el firewall-cmd 
+
+```
+firewall-cmd --zone=public --permanent --add-port=50000/tcp
+```
+
 Por ultimo, si queremos que los logical logs se hagan de forma continua :
 
     ontape -c # Ejecutar esto como root
