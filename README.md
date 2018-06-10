@@ -65,7 +65,7 @@ sudo vi /etc/services									# Añadimos esta linea al final del archivo /etc/i
 Y pegar este contenido : 
 
 ```
-	informix        50000/tcp		# Informix server
+informix        50000/tcp		# Informix server
 ```
 
 ```
@@ -140,3 +140,7 @@ VALUES ('Escuela Técnica Artigas', "Bernabé Rivera Esq. Gral Rivera", 626 , "4
 
 ```
  
+Por ultimo, si queremos que los logical logs se hagan de forma continua :
+
+    ontape -c # Ejecutar esto como root
+    
