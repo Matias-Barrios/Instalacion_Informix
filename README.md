@@ -174,7 +174,8 @@ VALUES ('Escuela Técnica Artigas', "Bernabé Rivera Esq. Gral Rivera", 626 , "4
 Habilitamos el puerto 50000 en el firewall-cmd 
 
 ```
-firewall-cmd --zone=public --permanent --add-port=50000/tcp
+sudo firewall-cmd --zone=public --permanent --add-port=50000/tcp
+sudo firewall-cmd --reload
 ```
 
 Por ultimo, si queremos que los logical logs se hagan de forma continua :
