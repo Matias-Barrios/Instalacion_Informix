@@ -179,3 +179,10 @@ Por ultimo, si queremos que los logical logs se hagan de forma continua :
 
     ontape -c # Ejecutar esto como root
     
+
+
+## Comandos utiles
+
+```
+firewall-cmd –-list-ports
+```
