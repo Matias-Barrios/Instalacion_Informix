@@ -60,12 +60,12 @@ ROOTSIZE 1000000
 Creamos el root dbspace
 
 ```
-su informix -c "mkdir /opt/informix/logdir"       # Creamos el directorio /opt/informix/logdir	
-su informix -c "chmod 770 /opt/informix/logdir"   # Le cambiamos los permisos
-cd /opt/informix/logdir                           # Nos movemos a /opt/informix/logdir	
-su informix -c "touch rootdbs"                    # Creamos el root dbs 
-su informix -c "chmod 660 rootdbs"                # Le cambiamos los permisos al dbspace root
-sudo chown informix.informix rootdbs              # Le cambiamos los owners al dbspace root
+su informix -c "mkdir /opt/informix/logdir"               # Creamos el directorio /opt/informix/logdir	
+sudo chown informix.informix /opt/informix/logdir         # Creamos el directorio /opt/informix/logdir	
+su informix -c "chmod 770 /opt/informix/logdir"           # Le cambiamos los permisos
+su informix -c "touch /opt/informix/logdir/rootdbs"       # Creamos el root dbs 
+su informix -c "chmod 660 /opt/informix/logdir/rootdbs"   # Le cambiamos los permisos al dbspace root
+sudo chown informix.informix /opt/informix/logdir/rootdbs # Le cambiamos los owners al dbspace root
 ```
 Editamos el archivo de servicios y añadimos el nuestro, que lo vamos a llamar... informix... :P
 
@@ -181,11 +181,3 @@ Por ultimo, si queremos que los logical logs se hagan de forma continua :
 
     ontape -c # Ejecutar esto como root
     
-
-
-## Comandos utiles
-
-```
-firewall-cmd --get-active-zones # Checquear cual es la zona activa
-firewall-cmd –-list-ports       # Chequear puertos
-```
