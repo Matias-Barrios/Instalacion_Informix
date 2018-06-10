@@ -184,5 +184,6 @@ Por ultimo, si queremos que los logical logs se hagan de forma continua :
 ## Comandos utiles
 
 ```
-firewall-cmd –-list-ports
+firewall-cmd --get-active-zones # Checquear cual es la zona activa
+firewall-cmd –-list-ports       # Chequear puertos
 ```
