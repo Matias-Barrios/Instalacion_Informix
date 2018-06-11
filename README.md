@@ -1,4 +1,4 @@
-### Instalar Informix 12.50 en Centos7
+### Instalar Informix 12.10 en Centos7
 
 Creamos el usuario informix, el grupo informix y un archivo de perfil compartido
 
