@@ -52,9 +52,7 @@ Buscamos donde estan esas lineas y las editamos
 
 ```
 ROOTPATH /opt/informix/logdir/rootdbs
-LTAPEDEV  /matiasInformixDBSpaces
 DBSERVERNAME miServidor
-ROOTSIZE 1000000
 ```
 
 Creamos el root dbspace
@@ -178,7 +176,4 @@ sudo firewall-cmd --zone=public --permanent --add-port=50000/tcp
 sudo firewall-cmd --reload
 ```
 
-Por ultimo, si queremos que los logical logs se hagan de forma continua :
 
-    ontape -c # Ejecutar esto como root
-    
