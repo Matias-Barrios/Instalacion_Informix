@@ -176,4 +176,11 @@ sudo firewall-cmd --zone=public --permanent --add-port=50000/tcp
 sudo firewall-cmd --reload
 ```
 
+### Para redirigir los logical logs a /dev/null ejecutar estos comandos
+̣
+```
+sudo su -
+ln  /dev/null /dev/tapedev
+ontape -c &
+```
 
