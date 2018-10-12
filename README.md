@@ -181,6 +181,6 @@ sudo firewall-cmd --reload
 ```
 sudo su -
 ln  /dev/null /dev/tapedev
-nohup ontape -c & disown
+echo | nohup ontape -c & disown
 ```
 
